@@ -12,6 +12,18 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
+  int Rows = m->rows;
+  int Cols = m->cols;
+  while(Rows>0){
+    if(!(Rows%4)){
+    printf("[");
+    }
+    while
+    for(Cols;Cols >= 0;Cols--){
+      printf("%f,",m->m[Rows][Cols]);
+    }
+    printf("]\n");
+  }
 }
 
 /*-------------- void ident() --------------
