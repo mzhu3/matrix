@@ -6,27 +6,34 @@
 
 
 /*-------------- void print_matrix() --------------
-Inputs:  struct matrix *m 
-Returns: 
+  Inputs:  struct matrix *m 
+  Returns: 
 
-print the matrix
+  print the matrix
 */
 void print_matrix(struct matrix *m) {
   int Rows = m->rows;
   int Cols = m->cols;
+  //printf("%d\n",Cols);
   while(Rows>0){
-    if(!(Rows%4)){
     printf("[");
+    while(Cols>0){
+      if(Cols>1){
+	printf("%f,",m->m);
+	Cols--;
+      }
+      else{
+	printf("%f",m->m);
+	Cols--;
+      }
     }
-    while
-    for(Cols;Cols >= 0;Cols--){
-      printf("%f,",m->m[Rows][Cols]);
-    }
+    Cols = 4;
+    Rows--;
     printf("]\n");
   }
 }
 
-/*-------------- void ident() --------------
+  /*-------------- void ident() --------------
 Inputs:  struct matrix *m <-- assumes m is a square matrix
 Returns: 
 
