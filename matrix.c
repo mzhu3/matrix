@@ -12,23 +12,27 @@
   print the matrix
 */
 void print_matrix(struct matrix *m) {
-  int Rows = m->rows;
-  int Cols = m->cols;
-  //printf("%d\n",Cols);
-  while(Rows>0){
+  int rows =0;
+  int cols = 0;
+  int maxRows = m->rows;
+  //printf("maxRows:%d\n",maxRows);
+  
+  int maxCol = m->lastcol;
+  //printf("maxCols:%d\n",maxCol);
+  while(rows < maxRows){
     printf("[");
-    while(Cols>0){
-      if(Cols>1){
-	printf("%f,",m->m);
-	Cols--;
+    while(cols < maxCol){
+      if(!(cols==maxCol - 1)){
+	printf("%f,",m->m[rows][cols]);
+	cols++;
       }
       else{
-	printf("%f",m->m);
-	Cols--;
+	printf("%f",m->m[rows][cols]);
+	cols++;
       }
     }
-    Cols = 4;
-    Rows--;
+    cols = 0;
+    rows++;
     printf("]\n");
   }
 }
@@ -40,6 +44,22 @@ Returns:
 turns m in to an identity matrix
 */
 void ident(struct matrix *m) {
+  int row,col;
+  row = 0;
+  col = 0;
+  while(row < m ->rows){
+    while(col< m->cols){
+      if(row == col){
+	m->m[row][col] = 1;
+      }
+      else{
+	m->m[row][col] = 0;
+      }
+      col++;
+    }
+    col = 0;
+    row++;
+  }
 }
 
 
@@ -51,6 +71,18 @@ Returns:
 multiply each element of m by x
 */
 void scalar_mult(double x, struct matrix *m) {
+  int row,col;
+  row = 0;
+  col = 0;
+  while(row < m->rows){
+    while(col < m ->cols){
+      m->m[row][col] = m->m[row][col] * x;
+      col++;
+    }
+    col = 0;
+    row++;
+  }
+    
 }
 
 
@@ -62,6 +94,29 @@ Returns:
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+  struct matrix *temp = new_matrix(a->rows,b->cols);
+  int row,col,index;
+  double total,value;
+  row = 0;
+  col = 0;
+  index = 0;
+  while(row < a ->rows){
+    while(col < b->cols){
+      total = 0;
+      while(index < a->cols){
+	value = (a->m[row][index] * b->m[index][col]);
+	total += value;
+	index ++;
+      }
+      temp ->m[row][col] = total;
+      index = 0;
+      col++;
+    }
+    col = 0;
+    row++;
+  }
+  copy_matrix(temp,b);
+  
 }
 
 

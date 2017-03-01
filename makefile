@@ -1,4 +1,4 @@
-OBJECTS= main.o matrix.o
+OBJECTS= main.o matrix.o display.o draw.o
 CFLAGS= -Wall
 CC= gcc
 
@@ -13,6 +13,9 @@ matrix.o: matrix.c matrix.h
 
 display.o: display.c display.h ml6.h
 	$(CC) $(CFLAGS) -c display.c
+
+draw.o: draw.c draw.h ml6.h matrix.h
+	$(CC) $(CFLAGS) -c draw.c
 
 run: main
 	./main
